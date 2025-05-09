@@ -1,7 +1,14 @@
 import { createElement } from '@lwc/engine-dom';
 import DisplayAccountNameCard from 'c/displayAccountNameCard';
+import getMyAccounts from '@salesforce/apex/DisplayAccountController.getMyAccounts';
 
-describe('c-display-account-name-card', () => {
+jest.mock('@salesforce/apex/DisplayAccountController.getMyAccounts',
+    () => { return { default: jest.fn() } },
+    { virtual: true }
+
+)
+
+describe('c-display-account-name-card', () => 
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
         while (document.body.firstChild) {
